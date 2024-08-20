@@ -51,6 +51,8 @@ android {
 
 dependencies {
 
+	implementation(project(":feature-rng"))
+
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
 	implementation(libs.androidx.activity.compose)
