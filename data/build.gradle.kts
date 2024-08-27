@@ -1,6 +1,7 @@
 plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.jetbrains.kotlin.android)
+	alias(libs.plugins.kotlin.kapt)
 	alias(libs.plugins.hilt.plugin)
 }
 
@@ -38,7 +39,7 @@ dependencies {
 	implementation(project(":domain"))
 
 	implementation(libs.hilt)
-	annotationProcessor(libs.hilt.compiler)
+	kapt(libs.hilt.compiler)
 
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
