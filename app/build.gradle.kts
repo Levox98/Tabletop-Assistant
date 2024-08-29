@@ -54,6 +54,7 @@ android {
 dependencies {
 
 	implementation(project(":data"))
+	implementation(project(":design-system"))
 	implementation(project(":feature-rng"))
 
 	implementation(libs.hilt)

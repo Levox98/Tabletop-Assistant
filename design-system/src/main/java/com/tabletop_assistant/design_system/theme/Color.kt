@@ -1,4 +1,4 @@
-package com.tabletop_assistant.ui.theme
+package com.tabletop_assistant.design_system.theme
 
 import androidx.compose.ui.graphics.Color
 
