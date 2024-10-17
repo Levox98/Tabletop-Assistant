@@ -21,10 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Tabletop Assistant"
 include(":app")
-include(":data")
-include(":domain")
+include(":core-ui")
+include(":data-rng")
 include(":feature-rng")
-include(":feature-character")
-include(":network")
-include(":navigation")
-include(":design-system")
