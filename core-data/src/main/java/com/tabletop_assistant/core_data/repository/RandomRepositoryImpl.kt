@@ -7,7 +7,7 @@ import javax.inject.Singleton
 import kotlin.random.Random
 
 @Singleton
-class RandomRepositoryImpl @Inject constructor() : RandomRepository {
+private class RandomRepositoryImpl @Inject constructor() : RandomRepository {
 
 	override fun rollDice(vararg dice: Dice): Pair<Int, Int> {
 		var rollResult = 0
