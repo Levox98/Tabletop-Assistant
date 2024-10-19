@@ -2,9 +2,12 @@ package com.tabletop_assistant.core_data.repository
 
 import com.tabletop_assistant.core_domain.entity.Dice
 import com.tabletop_assistant.core_domain.repository.RandomRepository
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.random.Random
 
-class RandomRepositoryImpl : RandomRepository {
+@Singleton
+class RandomRepositoryImpl @Inject constructor() : RandomRepository {
 
 	override fun rollDice(vararg dice: Dice): Pair<Int, Int> {
 		var rollResult = 0
