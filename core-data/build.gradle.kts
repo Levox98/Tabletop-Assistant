@@ -1,12 +1,10 @@
 plugins {
 	alias(libs.plugins.android.library)
 	alias(libs.plugins.jetbrains.kotlin.android)
-//	alias(libs.plugins.kotlin.kapt)
-//	alias(libs.plugins.hilt.plugin)
 }
 
 android {
-	namespace = "com.tabletop_assistant.data_rng"
+	namespace = "com.tabletop_assistant.core_data"
 	compileSdk = 34
 
 	defaultConfig {
@@ -37,10 +35,6 @@ android {
 dependencies {
 
 	implementation(project(":core-domain"))
-
-	// Hilt
-//	implementation(libs.hilt)
-//	kapt(libs.hilt.compiler)
 
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
