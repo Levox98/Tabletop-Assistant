@@ -1,5 +1,6 @@
 package com.tabletop_assistant.core_data.repository
 
+import com.tabletop_assistant.core_data.AppCache
 import com.tabletop_assistant.core_domain.entity.Dice
 import com.tabletop_assistant.core_domain.repository.RandomRepository
 import javax.inject.Inject
@@ -18,5 +19,9 @@ class RandomRepositoryImpl @Inject constructor() : RandomRepository {
 		}
 
 		return Pair(rollResult, maxResult)
+	}
+
+	override fun saveCustomRoll(vararg dice: Dice) {
+		// TODO: decide how to do this stuff
 	}
 }
