@@ -44,4 +44,10 @@ dependencies {
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
 	implementation(libs.material)
+
+	implementation(libs.coroutines)
+
+	implementation(libs.retrofit)
+	implementation(libs.okhttp.interceptor)
+	implementation(libs.converter.gson)
 }
