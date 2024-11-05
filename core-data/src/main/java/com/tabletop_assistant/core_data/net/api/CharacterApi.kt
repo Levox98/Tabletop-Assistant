@@ -19,7 +19,7 @@ class CharacterApi @Inject constructor(
 			},
 			mapper = {
 				it.results.map { raceEntity ->
-					RaceDataEntity(raceEntity.name, raceEntity.url)
+					RaceDataEntity(raceEntity.index, raceEntity.name, raceEntity.url)
 				}
 			}
 		)
@@ -31,7 +31,11 @@ class CharacterApi @Inject constructor(
 			},
 			mapper = {
 				it.results.map { characterClassEntity ->
-					CharacterClassDataEntity(characterClassEntity.name, characterClassEntity.url)
+					CharacterClassDataEntity(
+						characterClassEntity.index,
+						characterClassEntity.name,
+						characterClassEntity.url
+					)
 				}
 			}
 		)
