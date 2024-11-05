@@ -1,5 +1,6 @@
 package com.tabletop_assistant.core_data.net.api
 
+import com.tabletop_assistant.core_data.entity.CharacterClassDataEntity
 import com.tabletop_assistant.core_data.entity.RaceDataEntity
 import com.tabletop_assistant.core_data.net.BaseApi
 import com.tabletop_assistant.core_data.net.service.CharacterService
@@ -19,6 +20,18 @@ class CharacterApi @Inject constructor(
 			mapper = {
 				it.results.map { raceEntity ->
 					RaceDataEntity(raceEntity.name, raceEntity.url)
+				}
+			}
+		)
+
+	suspend fun loadCharacterClasses(): List<CharacterClassDataEntity>? =
+		runRequest(
+			request = {
+				service.getClassesList()
+			},
+			mapper = {
+				it.results.map { characterClassEntity ->
+					CharacterClassDataEntity(characterClassEntity.name, characterClassEntity.url)
 				}
 			}
 		)

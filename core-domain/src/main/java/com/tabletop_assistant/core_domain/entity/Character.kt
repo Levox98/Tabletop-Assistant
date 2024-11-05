@@ -2,7 +2,7 @@ package com.tabletop_assistant.core_domain.entity
 
 data class Character(
 	val race: String,
-	val classValue: String,
+	val charClass: String,
 	val background: String,
 //	val name: String,
 //	val level: Int,
