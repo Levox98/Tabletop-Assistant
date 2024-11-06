@@ -28,3 +28,4 @@ include(":core-ui")
 
 include(":feature-character")
 include(":feature-rng")
+include(":core")

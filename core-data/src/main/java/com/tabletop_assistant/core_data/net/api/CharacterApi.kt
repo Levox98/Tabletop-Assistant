@@ -1,5 +1,6 @@
 package com.tabletop_assistant.core_data.net.api
 
+import com.tabletop_assistant.core.Either
 import com.tabletop_assistant.core_data.entity.CharacterClassDataEntity
 import com.tabletop_assistant.core_data.entity.RaceDataEntity
 import com.tabletop_assistant.core_data.net.BaseApi
@@ -12,8 +13,9 @@ class CharacterApi @Inject constructor(
 	private val service: CharacterService
 ) : BaseApi() {
 
-	suspend fun loadRaces(): List<RaceDataEntity>? =
+	suspend fun loadRaces(): Either<List<RaceDataEntity>?> =
 		runRequest(
+			tag = "loadRaces",
 			request = {
 				service.getRacesList()
 			},
@@ -24,8 +26,9 @@ class CharacterApi @Inject constructor(
 			}
 		)
 
-	suspend fun loadCharacterClasses(): List<CharacterClassDataEntity>? =
+	suspend fun loadCharacterClasses(): Either<List<CharacterClassDataEntity>?> =
 		runRequest(
+			tag = "loadCharacterClasses",
 			request = {
 				service.getClassesList()
 			},
