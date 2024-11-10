@@ -1,6 +1,6 @@
 package com.tabletop_assistant.core_data.net
 
-import com.tabletop_assistant.core.Either
+import com.tabletop_assistant.core_domain.Either
 import retrofit2.Response
 
 open class BaseApi {

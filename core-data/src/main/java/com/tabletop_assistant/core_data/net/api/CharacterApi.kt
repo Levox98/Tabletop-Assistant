@@ -1,6 +1,6 @@
 package com.tabletop_assistant.core_data.net.api
 
-import com.tabletop_assistant.core.Either
+import com.tabletop_assistant.core_domain.Either
 import com.tabletop_assistant.core_data.entity.CharacterClassDataEntity
 import com.tabletop_assistant.core_data.entity.RaceDataEntity
 import com.tabletop_assistant.core_data.net.BaseApi

@@ -1,4 +1,4 @@
-package com.tabletop_assistant.core
+package com.tabletop_assistant.core_domain
 
 sealed class Either<T> {
 
