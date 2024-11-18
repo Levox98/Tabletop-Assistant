@@ -1,5 +1,7 @@
 package com.tabletop_assistant.core_domain.repository
 
+import com.tabletop_assistant.core_domain.Either
+
 interface CharacterRepository {
 
 	fun createCharacter()
@@ -7,4 +9,6 @@ interface CharacterRepository {
 	fun updateCharacter()
 	fun deleteCharacter()
 
+	suspend fun loadClassIndices(): Either<List<String>>
+	// TODO: think about how to return flow from repo
 }
