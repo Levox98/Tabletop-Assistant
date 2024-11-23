@@ -17,6 +17,10 @@ data class CharacterViewModelState(
     var indexList: List<String>? = null
 )
 
+sealed interface CharacterViewModelIntent {
+    data object LoadClasses : CharacterViewModelIntent
+}
+
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
     private val loadCharacterClassIndicesUseCase: LoadCharacterClassIndicesUseCase
@@ -28,8 +32,10 @@ class CharacterViewModel @Inject constructor(
     private val _characterClassIndices = MutableStateFlow<List<String>>(emptyList())
     val characterClassIndices: StateFlow<List<String>> = _characterClassIndices.asStateFlow()
 
-    init {
-        loadCharacterClassIndices()
+    fun collectIntent(intent: CharacterViewModelIntent) {
+        when (intent) {
+            CharacterViewModelIntent.LoadClasses -> loadCharacterClassIndices()
+        }
     }
 
     private fun loadCharacterClassIndices() {
@@ -37,15 +43,12 @@ class CharacterViewModel @Inject constructor(
             when (val result = loadCharacterClassIndicesUseCase()) {
                 is Either.Loading -> {
                     _state.value = _state.value.copy(isLoading = true, error = null)
-                    println("newState loading: ${_state.value}")
                 }
                 is Either.Success -> {
                     _state.value = _state.value.copy(isLoading = false, error = null, indexList = result.data)
-                    println("newState success: ${_state.value}")
                 }
                 is Either.Error -> {
                     _state.value = _state.value.copy(isLoading = false, error = result.error)
-                    println("newState error: ${_state.value}")
                 }
             }
         }

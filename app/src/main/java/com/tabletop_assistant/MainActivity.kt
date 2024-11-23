@@ -13,14 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tabletop_assistant.core_ui.theme.TabletopAssistantTheme
-import com.tabletop_assistant.feature_rng.view.DiceScreenRoot
-import com.tabletop_assistant.feature_rng.viewmodel.DiceScreenViewModel
+import com.tabletop_assistant.feature_character.view.CharacterScreenRoot
+import com.tabletop_assistant.feature_character.viewmodel.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-	val viewModel: DiceScreenViewModel by viewModels()
+	private val viewModel: CharacterViewModel by viewModels()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
 //						modifier = Modifier.padding(innerPadding)
 //					)
 
-					DiceScreenRoot(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+//					DiceScreenRoot(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
+					CharacterScreenRoot(modifier = Modifier.padding(innerPadding), viewModel = viewModel)
 				}
 			}
 		}
