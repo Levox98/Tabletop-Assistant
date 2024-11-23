@@ -10,5 +10,4 @@ interface CharacterRepository {
 	fun deleteCharacter()
 
 	suspend fun loadClassIndices(): Either<List<String>>
-	// TODO: think about how to return flow from repo
 }
