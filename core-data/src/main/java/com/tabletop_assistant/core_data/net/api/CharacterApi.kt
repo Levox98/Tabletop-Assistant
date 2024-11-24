@@ -3,6 +3,7 @@ package com.tabletop_assistant.core_data.net.api
 import com.tabletop_assistant.core_domain.Either
 import com.tabletop_assistant.core_data.entity.CharacterClassDataEntity
 import com.tabletop_assistant.core_data.entity.RaceDataEntity
+import com.tabletop_assistant.core_data.mappers.toData
 import com.tabletop_assistant.core_data.net.BaseApi
 import com.tabletop_assistant.core_data.net.service.CharacterService
 import javax.inject.Inject
@@ -21,8 +22,19 @@ class CharacterApi @Inject constructor(
 			},
 			mapper = {
 				it.results.map { raceEntity ->
-					RaceDataEntity(raceEntity.index, raceEntity.name, raceEntity.url)
+					raceEntity.toData()
 				}
+			}
+		)
+
+	suspend fun loadRaceInfo(index: String): Either<RaceDataEntity?> =
+		runRequest(
+			tag = "loadRaceInfo: $index",
+			request = {
+				service.getRaceInfo(index)
+			},
+			mapper = {
+				it.toData()
 			}
 		)
 

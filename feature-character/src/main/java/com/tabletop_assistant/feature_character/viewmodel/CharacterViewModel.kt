@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tabletop_assistant.core_domain.Either
 import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterClassIndicesUseCase
+import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterRacesUseCase
+import com.tabletop_assistant.core_domain.usecase.character.LoadRaceInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,6 +25,8 @@ sealed interface CharacterViewModelIntent {
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
+    private val loadCharacterRacesUseCase: LoadCharacterRacesUseCase,
+    private val loadRaceInfoUseCase: LoadRaceInfoUseCase,
     private val loadCharacterClassIndicesUseCase: LoadCharacterClassIndicesUseCase
 ) : ViewModel() {
 
