@@ -24,7 +24,7 @@ data class CharacterScreenState(
 sealed interface CharacterScreenDisplayState {
     data object Default : CharacterScreenDisplayState
     data object Loading : CharacterScreenDisplayState
-    data class Error(val e: Throwable) : CharacterScreenDisplayState
+    data class Error(val error: Throwable) : CharacterScreenDisplayState
     data class Content(val raceList: List<Race>) : CharacterScreenDisplayState
 }
 
@@ -53,14 +53,16 @@ class CharacterViewModel @Inject constructor(
                         is Either.Error -> updateState(
                             state.value.copy(
                                 isLoading = false,
-                                error = res.error
+                                error = res.error,
+                                displayState = CharacterScreenDisplayState.Error(res.error)
                             )
                         )
 
                         Either.Loading -> updateState(
                             state.value.copy(
                                 isLoading = true,
-                                error = null
+                                error = null,
+                                displayState = CharacterScreenDisplayState.Loading
                             )
                         )
 

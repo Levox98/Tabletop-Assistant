@@ -1,5 +1,6 @@
 package com.tabletop_assistant.feature_character.view
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -37,8 +38,19 @@ private fun CharacterScreen(
     LazyColumn(modifier = modifier) {
 
         item {
-            Button(onClick = { onIntent(CharacterViewModelIntent.LoadClasses) }) {
-                Text(text = "LOAD CLASSES")
+
+            Row {
+                Button(onClick = { onIntent(CharacterViewModelIntent.LoadClasses) }) {
+                    Text(text = "LOAD CLASSES")
+                }
+
+                if (displayState is CharacterScreenDisplayState.Loading) {
+                    Text("loading")
+                }
+
+                if (displayState is CharacterScreenDisplayState.Error) {
+                    Text("error: ${displayState.error}")
+                }
             }
         }
 
