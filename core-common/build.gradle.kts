@@ -39,4 +39,6 @@ dependencies {
     implementation(libs.material)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    implementation(libs.timber)
 }
