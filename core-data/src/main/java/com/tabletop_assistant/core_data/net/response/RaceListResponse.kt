@@ -17,27 +17,27 @@ class RaceListResponse(
 		@SerializedName("url")
 		val url: String,
 		@SerializedName("speed")
-		val speed: Int,
+		val speed: Int?,
 		@SerializedName("ability_bonuses")
-		val abilityBonuses: List<AbilityBonusEntity>,
+		val abilityBonuses: List<AbilityBonusEntity>?,
 		@SerializedName("alignment")
-		val alignment: String,
+		val alignment: String?,
 		@SerializedName("age")
-		val age: String,
+		val age: String?,
 		@SerializedName("size")
-		val size: String,
+		val size: String?,
 		@SerializedName("size_description")
-		val sizeDescription: String,
+		val sizeDescription: String?,
 		@SerializedName("starting_proficiencies")
-		val startingProficiencies: List<String>, // TODO
+		val startingProficiencies: List<String>?, // TODO
 		@SerializedName("languages")
-		val languages: List<LanguageEntity>,
+		val languages: List<LanguageEntity>?,
 		@SerializedName("language_desc")
-		val languageDesc: String,
+		val languageDesc: String?,
 		@SerializedName("traits")
-		val traits: List<TraitEntity>,
+		val traits: List<TraitEntity>?,
 		@SerializedName("subraces")
-		val subraces: List<String> // TODO
+		val subraces: List<String>? // TODO
 	) {
 
 		data class AbilityBonusEntity(

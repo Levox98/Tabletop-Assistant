@@ -4,17 +4,17 @@ data class RaceDataEntity(
 	val index: String,
 	val name: String,
 	val url: String,
-	val speed: Int,
-	val abilityBonuses: List<AbilityBonusDataEntity>,
-	val alignment: String,
-	val age: String,
-	val size: String,
-	val sizeDescription: String,
-	val startingProficiencies: List<String>, // TODO
-	val languages: List<LanguageDataEntity>,
-	val languageDesc: String,
-	val traits: List<TraitDataEntity>,
-	val subraces: List<String> // TODO
+	val speed: Int?,
+	val abilityBonuses: List<AbilityBonusDataEntity>?,
+	val alignment: String?,
+	val age: String?,
+	val size: String?,
+	val sizeDescription: String?,
+	val startingProficiencies: List<String>?, // TODO
+	val languages: List<LanguageDataEntity>?,
+	val languageDesc: String?,
+	val traits: List<TraitDataEntity>?,
+	val subraces: List<String>? // TODO
 ) {
 
 	data class AbilityBonusDataEntity(

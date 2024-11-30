@@ -10,15 +10,15 @@ fun RaceListResponse.RaceEntity.toData() =
         name = name,
         url = url,
         speed = speed,
-        abilityBonuses = abilityBonuses.map { it.toData() },
+        abilityBonuses = abilityBonuses?.map { it.toData() },
         alignment = alignment,
         age = age,
         size = size,
         sizeDescription = sizeDescription,
         startingProficiencies = startingProficiencies, // TODO
-        languages = languages.map { it.toData() },
+        languages = languages?.map { it.toData() },
         languageDesc = languageDesc,
-        traits = traits.map { it.toData() },
+        traits = traits?.map { it.toData() },
         subraces = subraces // TODO
     )
 
@@ -48,15 +48,15 @@ fun RaceDataEntity.toDomain() =
         name = name,
         url = url,
         speed = speed,
-        abilityBonuses = abilityBonuses.map { it.toDomain() },
+        abilityBonuses = abilityBonuses?.map { it.toDomain() },
         alignment = alignment,
         age = age,
         size = size,
         sizeDescription = sizeDescription,
         startingProficiencies = startingProficiencies, // TODO
-        languages = languages.map { it.toDomain() },
+        languages = languages?.map { it.toDomain() },
         languageDesc = languageDesc,
-        traits = traits.map { it.toDomain() },
+        traits = traits?.map { it.toDomain() },
         subraces = subraces // TODO
     )
 

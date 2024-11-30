@@ -4,17 +4,17 @@ data class Race(
     val index: String,
     val name: String,
     val url: String,
-    val speed: Int,
-    val abilityBonuses: List<AbilityBonus>,
-    val alignment: String,
-    val age: String,
-    val size: String,
-    val sizeDescription: String,
-    val startingProficiencies: List<String>, // TODO
-    val languages: List<Language>,
-    val languageDesc: String,
-    val traits: List<Trait>,
-    val subraces: List<String> // TODO
+    val speed: Int?,
+    val abilityBonuses: List<AbilityBonus>?,
+    val alignment: String?,
+    val age: String?,
+    val size: String?,
+    val sizeDescription: String?,
+    val startingProficiencies: List<String>?, // TODO
+    val languages: List<Language>?,
+    val languageDesc: String?,
+    val traits: List<Trait>?,
+    val subraces: List<String>? // TODO
 ) {
     data class AbilityBonus(
         val abilityScore: AbilityScore,

@@ -41,11 +41,11 @@ class CharacterViewModel @Inject constructor(
 
     fun collectIntent(intent: CharacterViewModelIntent) {
         when (intent) {
-            CharacterViewModelIntent.LoadClasses -> TODO()
+            CharacterViewModelIntent.LoadClasses -> getCharacterRacesFlow()
         }
     }
 
-    fun getCharacterRacesFlow() {
+    private fun getCharacterRacesFlow() {
         viewModelScope.launch(Dispatchers.IO) {
             getCharacterRacesFlowUseCase().collect { res ->
                 withContext(Dispatchers.Main) {
