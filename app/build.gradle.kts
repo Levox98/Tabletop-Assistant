@@ -22,6 +22,10 @@ android {
 		}
 	}
 
+	buildFeatures {
+		buildConfig = true
+	}
+
 	buildTypes {
 		release {
 			isMinifyEnabled = false
@@ -29,6 +33,15 @@ android {
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
 			)
+			buildConfigField("Boolean", "DEBUG", "${false}")
+		}
+		debug {
+			isMinifyEnabled = false
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
+			buildConfigField("Boolean", "DEBUG", "${true}")
 		}
 	}
 	compileOptions {
@@ -78,4 +91,6 @@ dependencies {
 	androidTestImplementation(libs.androidx.ui.test.junit4)
 	debugImplementation(libs.androidx.ui.tooling)
 	debugImplementation(libs.androidx.ui.test.manifest)
+
+	implementation(libs.timber)
 }

@@ -13,7 +13,7 @@ open class BaseViewModel<T: BaseViewModelState>(initialState: T) : ViewModel() {
     private val _state = MutableStateFlow<T>(initialState)
     val state: StateFlow<T>
         get() {
-            Timber.tag("${LOG_TAG}_getState").v("getting state of type ${state.value.javaClass.canonicalName}: ${state.value}")
+            Timber.tag("${LOG_TAG}_getState").v("getting state of type ${_state.value.javaClass.canonicalName}: ${_state.value}")
             return _state.asStateFlow()
         }
 
