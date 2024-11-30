@@ -1,23 +1,32 @@
 package com.tabletop_assistant.feature_character.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tabletop_assistant.core_common.BaseViewModel
+import com.tabletop_assistant.core_common.BaseViewModelState
 import com.tabletop_assistant.core_domain.Either
+import com.tabletop_assistant.core_domain.entity.Race
+import com.tabletop_assistant.core_domain.usecase.character.GetCharacterRacesFlowUseCase
 import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterClassIndicesUseCase
-import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterRacesUseCase
 import com.tabletop_assistant.core_domain.usecase.character.LoadRaceInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-data class CharacterViewModelState(
-    var isLoading: Boolean,
-    var error: Throwable?,
-    var indexList: List<String>? = null
-)
+
+data class CharacterScreenState(
+    override var isLoading: Boolean = false,
+    override var error: Throwable? = null,
+    val displayState: CharacterScreenDisplayState = CharacterScreenDisplayState.Default
+) : BaseViewModelState
+
+sealed interface CharacterScreenDisplayState {
+    data object Default : CharacterScreenDisplayState
+    data object Loading : CharacterScreenDisplayState
+    data class Error(val e: Throwable) : CharacterScreenDisplayState
+    data class Content(val raceList: List<Race>) : CharacterScreenDisplayState
+}
 
 sealed interface CharacterViewModelIntent {
     data object LoadClasses : CharacterViewModelIntent
@@ -25,34 +34,46 @@ sealed interface CharacterViewModelIntent {
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
-    private val loadCharacterRacesUseCase: LoadCharacterRacesUseCase,
+    private val getCharacterRacesFlowUseCase: GetCharacterRacesFlowUseCase,
     private val loadRaceInfoUseCase: LoadRaceInfoUseCase,
     private val loadCharacterClassIndicesUseCase: LoadCharacterClassIndicesUseCase
-) : ViewModel() {
-
-    private val _state = MutableStateFlow(CharacterViewModelState(false, null))
-    val state: StateFlow<CharacterViewModelState> = _state.asStateFlow()
-
-    private val _characterClassIndices = MutableStateFlow<List<String>>(emptyList())
-    val characterClassIndices: StateFlow<List<String>> = _characterClassIndices.asStateFlow()
+) : BaseViewModel<CharacterScreenState>(CharacterScreenState()) {
 
     fun collectIntent(intent: CharacterViewModelIntent) {
         when (intent) {
-            CharacterViewModelIntent.LoadClasses -> loadCharacterClassIndices()
+            CharacterViewModelIntent.LoadClasses -> TODO()
         }
     }
 
-    private fun loadCharacterClassIndices() {
-        viewModelScope.launch {
-            when (val result = loadCharacterClassIndicesUseCase()) {
-                is Either.Loading -> {
-                    _state.value = _state.value.copy(isLoading = true, error = null)
-                }
-                is Either.Success -> {
-                    _state.value = _state.value.copy(isLoading = false, error = null, indexList = result.data)
-                }
-                is Either.Error -> {
-                    _state.value = _state.value.copy(isLoading = false, error = result.error)
+    fun getCharacterRacesFlow() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getCharacterRacesFlowUseCase().collect { res ->
+                withContext(Dispatchers.Main) {
+                    when (res) {
+                        is Either.Error -> updateState(
+                            state.value.copy(
+                                isLoading = false,
+                                error = res.error
+                            )
+                        )
+
+                        Either.Loading -> updateState(
+                            state.value.copy(
+                                isLoading = true,
+                                error = null
+                            )
+                        )
+
+                        is Either.Success -> updateState(
+                            state.value.copy(
+                                isLoading = false,
+                                error = null,
+                                displayState = CharacterScreenDisplayState.Content(
+                                    res.data ?: emptyList()
+                                )
+                            )
+                        )
+                    }
                 }
             }
         }

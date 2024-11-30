@@ -10,9 +10,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.tabletop_assistant.feature_character.viewmodel.CharacterScreenDisplayState
+import com.tabletop_assistant.feature_character.viewmodel.CharacterScreenState
 import com.tabletop_assistant.feature_character.viewmodel.CharacterViewModel
 import com.tabletop_assistant.feature_character.viewmodel.CharacterViewModelIntent
-import com.tabletop_assistant.feature_character.viewmodel.CharacterViewModelState
 
 @Composable
 fun CharacterScreenRoot(
@@ -25,8 +26,13 @@ fun CharacterScreenRoot(
 }
 
 @Composable
-private fun CharacterScreen(modifier: Modifier, state: State<CharacterViewModelState>, onIntent: (CharacterViewModelIntent) -> Unit) {
-    val indices = state.value.indexList
+private fun CharacterScreen(
+    modifier: Modifier,
+    state: State<CharacterScreenState>,
+    onIntent: (CharacterViewModelIntent) -> Unit
+) {
+
+    val displayState = state.value.displayState
 
     LazyColumn(modifier = modifier) {
 
@@ -36,10 +42,10 @@ private fun CharacterScreen(modifier: Modifier, state: State<CharacterViewModelS
             }
         }
 
-        indices?.let {
-            items(indices.size) {
+        if (displayState is CharacterScreenDisplayState.Content) {
+            items(displayState.raceList.size) {
                 Button(onClick = {}) {
-                    Text(text = indices[it])
+                    Text(text = displayState.raceList[it].name)
                 }
             }
         }
@@ -49,10 +55,11 @@ private fun CharacterScreen(modifier: Modifier, state: State<CharacterViewModelS
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun CharacterScreenPreview() {
-    val mockState = CharacterViewModelState(
+
+    val mockState = CharacterScreenState(
         isLoading = false,
         error = null,
-        indexList = listOf("human", "not human", "very human", "somewhat human")
+        displayState = CharacterScreenDisplayState.Content(listOf()),
     )
 
     CharacterScreen(modifier = Modifier, state = remember { mutableStateOf(mockState) }) {}
