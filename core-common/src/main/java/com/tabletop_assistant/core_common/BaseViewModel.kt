@@ -24,6 +24,15 @@ open class BaseViewModel<T : BaseViewModelState>(initialState: T) : ViewModel() 
         _state.value = newState
     }
 
+    fun updateState(onNewState: (T) -> T) {
+        val new = onNewState(_state.value)
+
+        Timber.tag("${LOG_TAG}_updateState")
+            .v("${_state.value.javaClass.canonicalName} newState: $new")
+
+        _state.value = new
+    }
+
     companion object {
         private const val LOG_TAG = "log_vm"
     }
