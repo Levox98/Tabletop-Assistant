@@ -14,6 +14,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+typealias DisplayContent = CharacterScreenDisplayState.Content
+
 
 data class CharacterScreenState(
     override var isLoading: Boolean = false,
@@ -30,6 +32,7 @@ sealed interface CharacterScreenDisplayState {
         val raceInfo: Race? = null,
         val classList: List<String> = emptyList()
     ) : CharacterScreenDisplayState
+
 }
 
 sealed interface CharacterViewModelIntent {
@@ -133,11 +136,11 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
-    private inline fun updateContent(crossinline onContent: (CharacterScreenDisplayState.Content) -> CharacterScreenDisplayState.Content) {
-        val currentContent = if (state.value.displayState is CharacterScreenDisplayState.Content)
-            state.value.displayState as CharacterScreenDisplayState.Content
+    private inline fun updateContent(crossinline onContent: (DisplayContent) -> DisplayContent) {
+        val currentContent = if (state.value.displayState is DisplayContent)
+            state.value.displayState as DisplayContent
         else
-            CharacterScreenDisplayState.Content()
+            DisplayContent()
 
         val newContent = onContent(currentContent)
 
