@@ -40,7 +40,7 @@ private fun CharacterScreen(
         item {
 
             Row {
-                Button(onClick = { onIntent(CharacterViewModelIntent.LoadClasses) }) {
+                Button(onClick = { onIntent(CharacterViewModelIntent.LoadRaces) }) {
                     Text(text = "LOAD CLASSES")
                 }
 

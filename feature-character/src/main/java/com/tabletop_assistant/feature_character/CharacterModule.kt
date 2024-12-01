@@ -1,7 +1,7 @@
 package com.tabletop_assistant.feature_character
 
 import com.tabletop_assistant.core_domain.repository.CharacterRepository
-import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterClassIndicesUseCase
+import com.tabletop_assistant.core_domain.usecase.character.LoadCharacterClassIndicesFlowUseCase
 import com.tabletop_assistant.core_domain.usecase.character.GetCharacterRacesFlowUseCase
 import com.tabletop_assistant.core_domain.usecase.character.LoadRaceInfoUseCase
 import dagger.Module
@@ -23,5 +23,5 @@ object CharacterModule {
 
     @Provides
     fun provideLoadClassesUseCase(repository: CharacterRepository) =
-        LoadCharacterClassIndicesUseCase(repository)
+        LoadCharacterClassIndicesFlowUseCase(repository)
 }

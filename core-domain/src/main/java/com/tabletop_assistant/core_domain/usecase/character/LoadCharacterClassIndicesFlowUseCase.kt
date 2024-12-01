@@ -2,8 +2,8 @@ package com.tabletop_assistant.core_domain.usecase.character
 
 import com.tabletop_assistant.core_domain.repository.CharacterRepository
 
-class LoadCharacterClassIndicesUseCase(
+class LoadCharacterClassIndicesFlowUseCase(
     private val repository: CharacterRepository
 ) {
-    suspend operator fun invoke() = repository.loadClasses()
+    operator fun invoke() = repository.loadClasses()
 }

@@ -42,19 +42,25 @@ class CharacterRepositoryImpl @Inject constructor(
 		}
 	}
 
-	override suspend fun loadRaceInfo(raceIndex: String): Either<Race> {
-		return when (val result = characterApi.loadRaceInfo(raceIndex)) {
-			is Either.Loading -> Either.Loading
-			is Either.Error -> Either.Error(result.error)
-			is Either.Success -> Either.Success(result.data?.toDomain())
+	override fun loadRaceInfo(raceIndex: String): Flow<Either<Race>> = flow {
+
+		emit(Either.Loading)
+
+		when (val result = characterApi.loadRaceInfo(raceIndex)) {
+			is Either.Error -> emit(Either.Error(result.error))
+			is Either.Success -> emit(Either.Success(result.data?.toDomain()))
+			else -> emit(Either.Error(UnknownError("unknown error in method: loadRaceInfo")))
 		}
 	}
 
-	override suspend fun loadClasses(): Either<List<String>> {
-		return when (val result = characterApi.loadCharacterClasses()) {
-			is Either.Loading -> Either.Loading
-			is Either.Error -> Either.Error(result.error)
-			is Either.Success -> Either.Success(result.data?.map { it.index })
+	override fun loadClasses(): Flow<Either<List<String>>> = flow {
+
+		emit(Either.Loading)
+
+		when (val result = characterApi.loadCharacterClasses()) {
+			is Either.Error -> emit(Either.Error(result.error))
+			is Either.Success -> emit(Either.Success(result.data?.map { it.index }))
+			else -> emit(Either.Error(UnknownError("unknown error in method: loadClasses")))
 		}
 	}
 }

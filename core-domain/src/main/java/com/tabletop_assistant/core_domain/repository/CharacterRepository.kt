@@ -12,6 +12,6 @@ interface CharacterRepository {
 	fun deleteCharacter()
 
 	fun loadRaces(): Flow<Either<List<Race>>>
-	suspend fun loadRaceInfo(raceIndex: String): Either<Race>
-	suspend fun loadClasses(): Either<List<String>>
+	fun loadRaceInfo(raceIndex: String): Flow<Either<Race>>
+	fun loadClasses(): Flow<Either<List<String>>>
 }
